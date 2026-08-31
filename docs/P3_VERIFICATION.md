@@ -22,4 +22,4 @@ cd shell && npm test
 
 ## 商用
 
-**不**宣称可对外 SaaS。对外前必须走 `COMMERCIAL_PATH.md` 全部门禁。
+**暂不考虑。** 仅内网自托管；不排期对外 SaaS/嵌入（见 `COMMERCIAL_PATH.md`）。

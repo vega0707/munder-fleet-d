@@ -15,9 +15,9 @@ A/B/C 之外补 **D**：用户追问「为什么不以 Multica 为主」。结�
 
 ## 立刻该做
 
-> **P0–P3 已落地**（2026-08-31）。商用对外仍关闭，见 `docs/COMMERCIAL_PATH.md`。
+> **P0–P3 已落地**（2026-08-31）。**商用暂不考虑**（仅内网），见 `docs/COMMERCIAL_PATH.md`。
 
-1. 读 `LICENSE_NOTES.md` + `COMMERCIAL_PATH.md`
+1. 读 `LICENSE_NOTES.md`（仅自用/内网；不跟商用）
 2. `./scripts/bootstrap.sh` → `./scripts/selfhost-up.sh` → `multica daemon start`
 3. `./scripts/shell-up.sh` — 指挥台含**办公楼**座位视图
 4. `./scripts/hive-import.sh --tasks fixtures/hive/tasks.json [--apply]`

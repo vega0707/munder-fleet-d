@@ -8,7 +8,7 @@
 | 姊妹仓 | [`munder-fleet-a`](../munder-fleet-a) · [`b`](../munder-fleet-b) · [`c`](../munder-fleet-c) |
 | 主核 | [multica-ai/multica](https://github.com/multica-ai/multica)（Go server + daemon + 工作区） |
 | 参考 | AionCore/AionUi · Munder Difflin |
-| 状态 | P0–P3 完成（内网自托管）；对外商用见 `docs/COMMERCIAL_PATH.md` |
+| 状态 | P0–P3 完成 · **仅内网**（商用暂不考虑） |
 
 ## 和 A/B/C 的差别
 
@@ -24,8 +24,8 @@ Multica License = Apache-2.0 + **Part I 附加条件**：未经商业许可，�
 
 本仓默认场景：
 
-- ✅ 自用 / 组织内自托管接活平台  
-- ⚠️ 对外 SaaS 或嵌入售卖 → **先法务 / 谈商业许可**，否则不要选 D 当对外产品内核  
+- ✅ 自用 / 组织内自托管接活平台（**当前唯一目标**）  
+- ⏸️ 对外 SaaS / 嵌入售卖 — **暂不考虑**（见 `docs/COMMERCIAL_PATH.md`）
 
 对外品牌仍建议叫 **Munder**；文档可写 powered by / based on Multica（遵守 NOTICE）。
 
@@ -38,7 +38,7 @@ Multica License = Apache-2.0 + **Part I 附加条件**：未经商业许可，�
 5. `./scripts/shell-up.sh` — Munder 指挥台（办公楼 + 硬闸）http://127.0.0.1:3927
 6. `./scripts/hive-import.sh` — Difflin hive → Multica issues
 7. `./scripts/p2-second-daemon.sh` — 第二 daemon claim 隔离
-8. 商用？先读 [`docs/COMMERCIAL_PATH.md`](./docs/COMMERCIAL_PATH.md)
+8. 商用：暂不考虑（见 [`docs/COMMERCIAL_PATH.md`](./docs/COMMERCIAL_PATH.md)）
 
 ## 成功标准（P0）
 

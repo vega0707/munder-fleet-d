@@ -57,7 +57,7 @@ Hive 迁移：`./scripts/hive-import.sh`（见 `adapters/hive-import/README.md`�
 
 ### 商用
 
-见 `docs/COMMERCIAL_PATH.md` — 默认仅内网。
+暂不考虑；仅内网（`docs/COMMERCIAL_PATH.md`）。
 
 ## 本机免鉴权 vs 远程
 

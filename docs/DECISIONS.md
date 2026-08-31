@@ -30,4 +30,8 @@ Team MCP → Multica skill（`adapters/skills`）；第二 daemon 用 `--profile
 
 ## 2026-08-31 — P3 办公楼 / hive / 商用门禁
 
-壳内办公楼视图只消费 Multica board；hive `tasks.json` 可导入为 issues；对外商用仍关闭（`COMMERCIAL_PATH.md`）。
+壳内办公楼视图只消费 Multica board；hive `tasks.json` 可导入为 issues。
+
+## 2026-08-31 — 商用暂缓
+
+产品方明确：**暂不考虑对外商用**；仓定位仅为组织内自托管。不排期 SaaS/嵌入售卖。

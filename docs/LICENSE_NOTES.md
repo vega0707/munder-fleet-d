@@ -20,6 +20,6 @@ Multica 公开 LICENSE 含 Apache-2.0 全文 + **Part I Additional Conditions**�
 
 > 勾选含义：本仓按「组织内自托管接活平台」推进。若改为对外 SaaS 或嵌入售卖，必须清空本勾选、法务签字，并按 [`COMMERCIAL_PATH.md`](./COMMERCIAL_PATH.md) 完成门禁后再改叙事。
 
-## 商用门禁
+## 商用
 
-详见 [`COMMERCIAL_PATH.md`](./COMMERCIAL_PATH.md)。**P3 明确：商用路径未开放**（许可检查清单全未勾选）。
+**暂不考虑对外商用。** 详见 [`COMMERCIAL_PATH.md`](./COMMERCIAL_PATH.md)。
