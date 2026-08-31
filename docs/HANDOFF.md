@@ -15,9 +15,11 @@ A/B/C 之外补 **D**：用户追问「为什么不以 Multica 为主」。结�
 
 ## 立刻该做
 
-1. 读 `LICENSE_NOTES.md`，确认使用场景（组织内自托管 vs 对外产品）
+> **P0 已落地**（2026-08-31）：见 `docs/P0_VERIFICATION.md`。下一位从 **P1** 或复现 P0 演示开始。
+
+1. 读 `LICENSE_NOTES.md`，确认使用场景（组织内自托管 vs 对外产品）— P0 已勾选「仅自用/内网」
 2. `./scripts/bootstrap.sh`
-3. 按 Multica `SELF_HOSTING.md` 起 server + `multica daemon start`
+3. `./scripts/selfhost-up.sh`（或按 Multica `SELF_HOSTING.md`）起 server + `multica daemon start`
 4. 映射概念：
 
 | Munder / 讨论用语 | Multica |
@@ -28,8 +30,8 @@ A/B/C 之外补 **D**：用户追问「为什么不以 Multica 为主」。结�
 | PendingDecision | Inbox / review gate / 需人拍板 |
 | 角色 vega | Agent + member 权限 |
 
-5. 在 `shell/` 写清 Munder 壳接入方式（P0 可先 deep-link / API 只读看板）
-6. 在 `adapters/aion-gap.md` 列出要参考 Aion 补的能力（Team 会话质感、关口 UX）
+5. 在 `shell/` 写清 Munder 壳接入方式（P0 可先 deep-link / API 只读看板）— 已写 `shell/README.md`
+6. 在 `adapters/aion-gap.md` 列出要参考 Aion 补的能力（Team 会话质感、关口 UX）— 已含 P1 计划
 
 ## 不要做
 
