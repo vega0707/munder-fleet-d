@@ -1,23 +1,37 @@
 # Aion 能力差距（相对 Multica 主核）
 
-对照 `refs/AionCore` / `refs/AionUi`。P0 只列差距与 **P1 计划**；实现落在 P1/P2。
+对照 `refs/AionCore` / `refs/AionUi`。实现落在 **adapters/** 与壳，不 subtree 进主核。
 
-| Capability | Multica today | Aion reference | P1 计划 |
-|------------|---------------|----------------|---------|
-| Team 会话 / wake | skills + assign / mention / chat | Team MCP + scheduler wake | 先用 Multica assign + chat 覆盖「叫醒」；Team MCP 细粒度工具做差距清单，优先 **Multica skill** 而非旁路 gateway |
-| AskUser / 权限关口 UX | Inbox + review（`in_review`）+ agent Access | ACP permission + questions | 壳内「硬闸」= Inbox 未读 + `in_review` issue；P1 映射文案，不重做协议 |
-| Cowork / 远程 Web | 内置 Web + auth | AionUi remote | **优先 Multica Web**；Munder 壳作品牌层深链/只读 API |
-| 多 provider CLI 编排质感 | daemon 多 runtime provider | aionrs / ACP 会话 | 对照 daemon 日志与失败理由；缺口用 skill/instructions 补，不 fork 第二执行器 |
-| 角色 / 成员权限 | agent Access + workspace member | Aion 角色模型 | 文档映射到 agent permission_mode；壳只展示，不另建 ACL |
-| 多机 claim / 隔离 | 每机一 daemon；task 绑 runtime | 分布式接活体验 | P2：第二台 daemon 验收「任务不漂移」 |
+| Capability | Multica today | Aion reference | 状态 / 补法 |
+|------------|---------------|----------------|-------------|
+| Team 会话 / wake | skills + assign / mention / chat / squad | Team MCP（`team_spawn_agent` 等） | **P2**：skill `adapters/skills/munder-team-wake` |
+| AskUser / 权限关口 UX | Inbox + `in_review` + agent Access | ACP permission | **P1 壳硬闸** + skill `munder-hard-gate` |
+| Cowork / 远程 Web | 内置 Web + auth | AionUi remote | 优先 Multica Web；壳深链 |
+| 多 provider CLI 编排质感 | daemon 多 provider | aionrs / ACP | 不 fork 执行器；用 skill/instructions |
+| 角色 / 成员权限 | agent permission_mode | Aion 角色 | 壳只展示，不另建 ACL |
+| 多机 claim / 隔离 | task 绑 runtime | 分布式接活 | **P2**：`scripts/p2-second-daemon.sh`（第二 `--profile` daemon） |
 
-## P1 验收建议
+## 导入 skill（可选，写入当前 Multica workspace）
 
-1. 壳能列出 Inbox + `in_review`，文案称「待拍板 / 硬闸」  
-2. 选定 1–2 个 Aion Team 工具，写成 Multica skill 草案（仍不进主核 fork）  
-3. 明确：远程鉴权继续走 Multica，不引入 Aion 并行登录态  
+```bash
+cd adapters/skills
+zip -r /tmp/munder-team-wake.skill munder-team-wake
+zip -r /tmp/munder-hard-gate.skill munder-hard-gate
+multica skill import --file /tmp/munder-team-wake.skill --on-conflict overwrite --output json
+multica skill import --file /tmp/munder-hard-gate.skill --on-conflict overwrite --output json
+```
+
+## 第二 daemon 验收
+
+```bash
+./scripts/p2-second-daemon.sh
+# 报告：/tmp/munder-p2-second-daemon.json — ok=true 且 task_runtime_id == runtime_b
+```
+
+同机双 profile 模拟两台机器（上游支持）；真多机只需第二台装 CLI + `daemon start`。
 
 ## 参考路径
 
-- Aion：`refs/AionCore`、`refs/AionUi`（对照，不默认 subtree）  
-- Multica：`refs/multica` 文档 `inbox` / `assigning-issues` / `daemon-runtimes`
+- Aion：`refs/AionCore/crates/aionui-api-types/src/team_tools.rs`、AionUi ACP permissions  
+- Multica：inbox / assigning-issues / daemon-runtimes / squads  
+- 壳：`shell/bridge.mjs` → `hard_gates`

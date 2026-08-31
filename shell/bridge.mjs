@@ -209,7 +209,8 @@ async function buildBoard(upstream) {
     copy: {
       hard_gate:
         "硬闸 = Multica Inbox 未归档通知 + status_category=in_review 的 issue（待人拍板）",
-      assignee: "看板语义保持 assignee（member / agent / squad），不另建 claim 总线",
+      assignee:
+        "看板语义保持 assignee；task 绑 runtime（多 daemon 不漂移）— 见 adapters/aion-gap.md",
     },
   };
 }

@@ -23,3 +23,7 @@
 ## 2026-08-31 — P1 本机桥免登
 
 Munder 壳经 `127.0.0.1` bridge 注入本机 Multica CLI token；远程显式 PAT。硬闸 = Inbox + `in_review`。不新增 claim 总线。
+
+## 2026-08-31 — P2 Aion 差距与双 daemon
+
+Team MCP → Multica skill（`adapters/skills`）；第二 daemon 用 `--profile` 验收 task↔runtime 绑定，不迁移。

@@ -102,11 +102,15 @@ async function refresh() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || res.statusText);
 
-    metaEl.innerHTML = `mode <strong>${esc(data.bridge.mode)}</strong><br/>
+    <metaEl.innerHTML = `mode <strong>${esc(data.bridge.mode)}</strong><br/>
       ${esc(data.me?.name || "")} · ${esc(data.me?.email || "")}<br/>
-      ws ${esc(data.bridge.workspace_id || "—")}`;
+      ws ${esc(data.bridge.workspace_id || "—")}<br/>
+      runtimes online <strong>${(data.runtimes || []).filter((r) => r.status === "online").length}</strong>`;
     openMultica.href = data.bridge.app_url || "http://localhost:3000";
-    footCopy.textContent = data.copy?.hard_gate || "";
+    footCopy.textContent =
+      (data.copy?.hard_gate || "") +
+      " · " +
+      (data.copy?.assignee || "task 绑 runtime，多 daemon 不漂移");
 
     renderRuntimes(data.runtimes || []);
     renderGates(data.hard_gates, data.bridge.app_url);

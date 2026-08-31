@@ -15,8 +15,8 @@
 
 ## P2 — Aion 差距补齐
 
-- 对照 Aion Team/关口：缺什么用 Multica skill、旁路服务或壳内实现补  
-- 多机第二个 daemon 验收 claim/隔离  
+- [x] 对照 Aion Team/关口：Multica skill 草案（`adapters/skills/munder-team-wake`、`munder-hard-gate`）  
+- [x] 多机第二个 daemon 验收 claim/隔离（`scripts/p2-second-daemon.sh`）  
 
 ## P3 — 品牌与迁移
 
