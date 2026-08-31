@@ -2,10 +2,10 @@
 
 ## P0 — Multica 单节点 = 本地版
 
-- bootstrap refs；自托管 server + 本机 daemon  
-- 用 Multica 原生 UI 跑通：建项目 → 派 agent → 执行 → review  
-- 写 `shell/README.md`：Munder 壳接入选项（API 只读 / 后期办公楼）  
-- 完成 `LICENSE_NOTES` 勾选  
+- [x] bootstrap refs；自托管 server + 本机 daemon（`scripts/bootstrap.sh` + `scripts/selfhost-up.sh`）  
+- [x] 用 Multica 原生路径跑通：建项目 → 派 agent → 执行(claim) → review（真模型需真实 CLI；见 `docs/P0_VERIFICATION.md`）  
+- [x] 写 `shell/README.md`：Munder 壳接入选项（API 只读 / 后期办公楼）  
+- [x] 完成 `LICENSE_NOTES` 勾选（仅自用/内网）  
 
 ## P1 — Munder 壳 + 概念映射
 
