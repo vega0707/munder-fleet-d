@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Munder — Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <header class="top">
+      <div class="brand-block">
+        <p class="eyebrow">Strategy D · Multica core</p>
+        <h1 class="brand">Munder</h1>
+        <p class="tagline">本机指挥台 · assignee 看板 · 硬闸</p>
+      </div>
+      <div class="meta" id="bridge-meta">连接中…</div>
+    </header>
+
+    <main class="layout">
+      <section class="panel" aria-labelledby="runtime-title">
+        <div class="panel-head">
+          <h2 id="runtime-title">Runtime</h2>
+          <p>本机 daemon 在线状态（本地版 = 单节点）</p>
+        </div>
+        <ul class="runtime-list" id="runtime-list"></ul>
+      </section>
+
+      <section class="panel accent" aria-labelledby="gate-title">
+        <div class="panel-head">
+          <h2 id="gate-title">硬闸</h2>
+          <p>Inbox + <code>in_review</code> — 需人拍板</p>
+        </div>
+        <div class="gate-grid">
+          <div>
+            <h3>待拍板 · in_review</h3>
+            <ul id="gate-review"></ul>
+          </div>
+          <div>
+            <h3>Inbox</h3>
+            <ul id="gate-inbox"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel wide" aria-labelledby="board-title">
+        <div class="panel-head">
+          <h2 id="board-title">Assignee 看板</h2>
+          <p>不另建 claim 总线 — 直接读 Multica issues</p>
+        </div>
+        <div class="board" id="assignee-board"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span id="foot-copy"></span>
+      <a id="open-multica" href="http://localhost:3000" target="_blank" rel="noreferrer"
+        >打开 Multica Web</a
+      >
+    </footer>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

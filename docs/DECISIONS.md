@@ -19,3 +19,7 @@
 ## 2026-08-31 — P0 上游默认路径
 
 自托管走官方 `docker-compose.selfhost.yml`（经 `scripts/selfhost-up.sh`）；不并行自研 claim 总线。嵌套容器环境需 vfs storage + 可能关闭 `bridge-nf-call-iptables`（见 `docs/P0_VERIFICATION.md`）。
+
+## 2026-08-31 — P1 本机桥免登
+
+Munder 壳经 `127.0.0.1` bridge 注入本机 Multica CLI token；远程显式 PAT。硬闸 = Inbox + `in_review`。不新增 claim 总线。

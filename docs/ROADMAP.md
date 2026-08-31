@@ -9,9 +9,9 @@
 
 ## P1 — Munder 壳 + 概念映射
 
-- Electron/Web 壳展示任务（assignee）与 runtime 在线状态  
-- 本机壳免登连本机桥；远程走 Multica auth  
-- 待定/Inbox 映射到「硬闸」产品叙述  
+- [x] Electron/Web 壳展示任务（assignee）与 runtime 在线状态（`shell/public` + `bridge.mjs`）  
+- [x] 本机壳免登连本机桥；远程走 Multica auth（`MUNDER_MULTICA_TOKEN`）  
+- [x] 待定/Inbox 映射到「硬闸」产品叙述  
 
 ## P2 — Aion 差距补齐
 

@@ -23,6 +23,17 @@
   Claude / Codex / Cursor / …（参考 Aion 的 ACP/会话体验作增强）
 ```
 
+## 架构补充（P1）
+
+```
+Munder Web / Electron ──(loopback)──► shell/bridge.mjs ──Bearer──► Multica :8080
+                                         │
+                                         └─ local: ~/.multica/config.json
+                                            remote: MUNDER_MULTICA_TOKEN
+```
+
+硬闸产品叙述：Inbox 未归档通知 ∪ issue.`status_category=in_review`。
+
 ## 本地退化
 
 组织内一台电脑：server（可 docker）+ 本机 daemon → 即「本地版」。  

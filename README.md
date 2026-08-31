@@ -8,7 +8,7 @@
 | 姊妹仓 | [`munder-fleet-a`](../munder-fleet-a) · [`b`](../munder-fleet-b) · [`c`](../munder-fleet-c) |
 | 主核 | [multica-ai/multica](https://github.com/multica-ai/multica)（Go server + daemon + 工作区） |
 | 参考 | AionCore/AionUi · Munder Difflin |
-| 状态 | P0 已跑通本地版（见 `docs/P0_VERIFICATION.md`） |
+| 状态 | P0 本地版 + P1 Munder 壳（见 `docs/P0_VERIFICATION.md` / `P1_VERIFICATION.md`） |
 
 ## 和 A/B/C 的差别
 
@@ -35,7 +35,8 @@ Multica License = Apache-2.0 + **Part I 附加条件**：未经商业许可，�
 2. [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) · [`docs/COPY_MAP.md`](./docs/COPY_MAP.md) · [`docs/LICENSE_NOTES.md`](./docs/LICENSE_NOTES.md)
 3. `./scripts/bootstrap.sh` — clone Multica + Aion + Munder 到 `refs/`
 4. `./scripts/selfhost-up.sh` — 官方 compose 自托管；再 `multica daemon start`
-5. 按 [`docs/ROADMAP.md`](./docs/ROADMAP.md)：单机 daemon = 本地版 → 挂 Munder 壳 / Aion 能力对照清单
+5. `./scripts/shell-up.sh` — Munder 指挥台（本机免登桥）http://127.0.0.1:3927
+6. 按 [`docs/ROADMAP.md`](./docs/ROADMAP.md)：P2 Aion 差距 / 多机 daemon
 
 ## 成功标准（P0）
 
