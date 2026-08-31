@@ -1,6 +1,6 @@
 # Munder 壳接入 Multica（Strategy D）
 
-对外品牌壳是 Munder**；控制面主核是 Multica。P0 不替换 Multica Web，只定接入路径。
+对外品牌壳是 Munder**；控制面主核是 Multica。
 
 ## 概念映射（看板语义）
 
@@ -9,42 +9,58 @@
 | Michael | Squad leader / 编排 agent | 显示为 assignee（agent） |
 | Runtime | daemon 注册的 runtime | 在线/离线状态灯 |
 | Claim | assign → task pickup | 只读看 `assignee` + task status |
-| PendingDecision | Inbox / `in_review` | 「硬闸」列表入口 |
+| PendingDecision | Inbox / `in_review` | **硬闸**列表 |
 | 角色 vega | Agent + member 权限 | 权限仍走 Multica |
 
 本地版 = **一台机器上 1 个 daemon**（无 `solo|distributed` 旗标）。
 
-## 接入选项（由浅到深）
+## 快速启动（P1）
 
-### P0a — Deep-link / iframe 过渡（最快）
+前置：Multica 自托管已起，且本机已 `multica login`（`~/.multica/config.json` 有 token）。
 
-- 壳内打开 Multica Web：`http://localhost:3000`（自托管）或组织域名。
-- 深链示例：
-  - 看板 / 项目：`/workspaces/{slug}/...`（以当前 Multica Web 路由为准）
-  - Issue：通过 identifier（如 `MUL-1`）在 Web 内打开
-  - Inbox / review：Web Inbox；状态类别 `in_review` = 待人拍板
-- 鉴权：远程走 Multica；本机 Electron 后期可免登桥接（P1）。
+```bash
+./scripts/shell-up.sh
+# 打开 http://127.0.0.1:3927
+```
 
-适用：先演示品牌壳 + 原生能力，不写适配代码。
+可选 Electron（本机免登，加载同一 loopback 桥）：
 
-### P0b — App API 只读看板（推荐 P0 交付）
+```bash
+cd shell && npm install   # 拉取 optional electron
+npm run electron
+```
 
-用 **成员 JWT 或 PAT（`mul_...`）** 调 Multica App API（默认 `http://localhost:8080`）。  
-Public API v1 目前 mainly Issue/Comment 切片；壳看板优先走 Web 同款 App API。
+## 接入层次
 
-只读最小集合（均需 `Authorization: Bearer <token>`，并带 workspace 上下文——CLI/`X-Workspace-Id` 或路径内 workspace）：
+### P0a — Deep-link / iframe 过渡
+
+壳内打开 Multica Web：`http://localhost:3000`。鉴权走 Multica。
+
+深链示例：看板 `/workspaces/{slug}/...`；Issue identifier（如 `MUL-1`）；Inbox / `in_review` = 待人拍板。
+
+### P0b / P1 — 本机桥 + Command Center
+
+`shell/bridge.mjs`：
+
+- **只绑 `127.0.0.1`**
+- **local 模式**：读 `~/.multica/config.json`，代理时注入 `Authorization` → 壳免登
+- **remote 模式**：`MUNDER_MULTICA_TOKEN`（+ `MUNDER_MULTICA_SERVER_URL` / `MUNDER_WORKSPACE_ID`）
+- `GET /bridge/board`：issues（assignee）+ runtimes + 硬闸（Inbox + `in_review`）
+- `GET /multica/*`：透传 App API（仍注入 token）
+
+只读 App API 最小集合（均需 Bearer；workspace 上下文由 CLI/`X-Workspace-Id` 或路径提供）：
 
 | 用途 | 端点（示意） |
 |------|----------------|
 | 当前用户 | `GET /api/me` |
 | 工作区 | `GET /api/workspaces` |
-| 项目 | `GET /api/projects`（workspace 作用域） |
-| 任务/Issue（assignee） | `GET /api/issues` |
-| Runtime 在线 | `GET /api/runtimes` |
+| 项目 | `GET /api/projects` |
+| 任务/Issue | `GET /api/issues` |
+| Runtime | `GET /api/runtimes` |
 | Agent | `GET /api/agents` |
-| 待办/闸口 | `GET /api/inbox` + issue `status`/`status_category=in_review` |
+| 待办/闸口 | `GET /api/inbox` + `status_category=in_review` |
 
-CLI 等价验收（本仓 P0 已跑通）：
+CLI 等价：
 
 ```bash
 multica project list --output json
@@ -53,28 +69,30 @@ multica runtime list --output json
 multica agent list --output json
 ```
 
-壳 UI 建议：**一张 assignee 看板**（member/agent/squad）+ runtime 在线点；不要并行再造 claim 总线。
-
-### P1 — 写操作 + 本机免鉴权桥
-
-- 派单：`POST` assign / `multica issue assign`
-- 本机 Electron：loopback 桥签发短时 token；远程仍 Multica auth
-- 办公楼可视化：只消费上述只读模型，不另起 hive 协议
+UI：`shell/public/` — Munder 品牌指挥台（assignee 看板 · runtime · 硬闸 · 办公楼）。
 
 ### P2+ — 办公楼深度集成
 
-见 `docs/ROADMAP.md` P3；Multica Web 可长期作过渡控制台。
+壳内 **办公楼** 视图（`#office-floor`）：座位=agent、灯=runtime、卡片=assignee issues。  
+**不**替换 Multica Web；深链仍可用。
+
+Hive 迁移：`./scripts/hive-import.sh`（见 `adapters/hive-import/README.md`）。
+
+### 商用
+
+暂不考虑；仅内网（`docs/COMMERCIAL_PATH.md`）。
 
 ## 本机免鉴权 vs 远程
 
 | 场景 | 鉴权 |
 |------|------|
-| Munder Electron ↔ 本机 Multica | P1：本机桥免登 |
-| 浏览器打开 Multica Web | Multica 邮箱验证码 / OAuth |
-| 壳连远程 API | Multica PAT 或 session |
+| Munder Web/Electron ↔ 本机桥 | loopback + CLI config token（免二次登录） |
+| 浏览器直连 Multica Web | Multica 邮箱验证码 / OAuth |
+| 壳连远程 API | `MUNDER_MULTICA_TOKEN` |
 
 ## 不要做
 
 - 用另一套 claim/queue 绕过 Multica assign/task
 - 对外把壳叙事写成「Multica 永久品牌替换」却不改名
 - 未更新 `LICENSE_NOTES.md` 就把栈当对外 SaaS 内核卖
+- 把 bridge 绑到 `0.0.0.0`（会绕过本机免登边界）

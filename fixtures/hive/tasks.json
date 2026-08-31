@@ -1,0 +1,28 @@
+[
+  {
+    "id": "hive-1001",
+    "subject": "Draft onboarding README for fleet-d",
+    "description": "Imported from Difflin hive sample — write a short README section.",
+    "assignee": "Michael",
+    "status": "todo",
+    "priority": "high",
+    "origin": "munder-difflin-hive"
+  },
+  {
+    "id": "hive-1002",
+    "title": "Clarify hard-gate copy with human",
+    "body": "Needs human approval before shipping shell copy.",
+    "owner": "Michael",
+    "status": "blocked",
+    "needs_human": true,
+    "origin": "munder-difflin-hive"
+  },
+  {
+    "id": "hive-1003",
+    "subject": "Probe second runtime heartbeat",
+    "assignee": "WorkerB-node-b",
+    "status": "done",
+    "result": "Already verified in P2",
+    "origin": "munder-difflin-hive"
+  }
+]

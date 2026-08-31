@@ -9,17 +9,17 @@
 
 ## P1 — Munder 壳 + 概念映射
 
-- Electron/Web 壳展示任务（assignee）与 runtime 在线状态  
-- 本机壳免登连本机桥；远程走 Multica auth  
-- 待定/Inbox 映射到「硬闸」产品叙述  
+- [x] Electron/Web 壳展示任务（assignee）与 runtime 在线状态（`shell/public` + `bridge.mjs`）  
+- [x] 本机壳免登连本机桥；远程走 Multica auth（`MUNDER_MULTICA_TOKEN`）  
+- [x] 待定/Inbox 映射到「硬闸」产品叙述  
 
 ## P2 — Aion 差距补齐
 
-- 对照 Aion Team/关口：缺什么用 Multica skill、旁路服务或壳内实现补  
-- 多机第二个 daemon 验收 claim/隔离  
+- [x] 对照 Aion Team/关口：Multica skill 草案（`adapters/skills/munder-team-wake`、`munder-hard-gate`）  
+- [x] 多机第二个 daemon 验收 claim/隔离（`scripts/p2-second-daemon.sh`）  
 
 ## P3 — 品牌与迁移
 
-- Munder 办公楼深度集成（非必须替换 Multica Web）  
-- 从 munder-difflin hive 导入任务  
-- 商用路径（若需要）完成许可  
+- [x] Munder 办公楼深度集成（壳内 floor 视图；不替换 Multica Web）  
+- [x] 从 munder-difflin hive 导入任务（`scripts/hive-import.sh` + `fixtures/hive`）  
+- [x] 商用路径：**暂不考虑**（`docs/COMMERCIAL_PATH.md` 已标明仅内网、不排期对外）  

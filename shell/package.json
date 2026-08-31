@@ -1,0 +1,19 @@
+{
+  "name": "@munder/shell",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Munder Command Center shell over Multica (Strategy D)",
+  "type": "module",
+  "scripts": {
+    "bridge": "node bridge.mjs",
+    "start": "node bridge.mjs",
+    "test": "node --test test/*.test.mjs",
+    "electron": "electron electron/main.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "optionalDependencies": {
+    "electron": "^37.2.0"
+  }
+}
