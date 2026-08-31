@@ -50,7 +50,14 @@ UI：`shell/public/` — Munder 品牌指挥台（assignee 看板 · runtime · 
 
 ### P2+ — 办公楼深度集成
 
-见 `docs/ROADMAP.md` P3；不另起 claim/hive 总线。
+壳内 **办公楼** 视图（`#office-floor`）：座位=agent、灯=runtime、卡片=assignee issues。  
+**不**替换 Multica Web；深链仍可用。
+
+Hive 迁移：`./scripts/hive-import.sh`（见 `adapters/hive-import/README.md`）。
+
+### 商用
+
+见 `docs/COMMERCIAL_PATH.md` — 默认仅内网。
 
 ## 本机免鉴权 vs 远程
 

@@ -20,6 +20,6 @@
 
 ## P3 — 品牌与迁移
 
-- Munder 办公楼深度集成（非必须替换 Multica Web）  
-- 从 munder-difflin hive 导入任务  
-- 商用路径（若需要）完成许可  
+- [x] Munder 办公楼深度集成（壳内 floor 视图；不替换 Multica Web）  
+- [x] 从 munder-difflin hive 导入任务（`scripts/hive-import.sh` + `fixtures/hive`）  
+- [x] 商用路径门禁文档（`docs/COMMERCIAL_PATH.md`；**未开放对外售卖**）  

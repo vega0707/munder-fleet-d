@@ -3,6 +3,7 @@ const runtimeList = document.getElementById("runtime-list");
 const gateReview = document.getElementById("gate-review");
 const gateInbox = document.getElementById("gate-inbox");
 const boardEl = document.getElementById("assignee-board");
+const floorEl = document.getElementById("office-floor");
 const footCopy = document.getElementById("foot-copy");
 const openMultica = document.getElementById("open-multica");
 
@@ -17,6 +18,53 @@ function esc(s) {
 function statusDot(status) {
   const cls = status === "online" ? "online" : status ? "offline" : "unknown";
   return `<span class="dot ${cls}" aria-hidden="true"></span>`;
+}
+
+function renderFloor(agents, issues, runtimes) {
+  const runtimeById = Object.fromEntries((runtimes || []).map((r) => [r.id, r]));
+  const byAssignee = new Map();
+  for (const issue of issues || []) {
+    if (issue.assignee_type !== "agent" || !issue.assignee_id) continue;
+    if (!byAssignee.has(issue.assignee_id)) byAssignee.set(issue.assignee_id, []);
+    byAssignee.get(issue.assignee_id).push(issue);
+  }
+
+  const seats = (agents || []).filter((a) => !a.archived_at);
+  if (!seats.length) {
+    floorEl.innerHTML = `<p class="empty">暂无 agent 座位 — 先在 Multica 创建 agent</p>`;
+    return;
+  }
+
+  floorEl.innerHTML = seats
+    .map((agent) => {
+      const rt = agent.runtime_id ? runtimeById[agent.runtime_id] : null;
+      const cards = byAssignee.get(agent.id) || [];
+      const online = rt?.status === "online";
+      return `<article class="desk ${cards.length ? "" : "empty-seat"}">
+        <h3 class="desk-name">${esc(agent.name)}</h3>
+        <div class="desk-meta">
+          ${statusDot(rt?.status)} ${esc(rt?.name || "未绑定 runtime")}
+          ${online ? "· 在席" : "· 空席/离线"}
+        </div>
+        <ul class="desk-cards">
+          ${
+            cards.length
+              ? cards
+                  .map((i) => {
+                    const gate =
+                      i.status_category === "in_review" || i.status === "in_review";
+                    return `<li class="desk-card ${gate ? "gate" : ""}">
+                      <strong>${esc(i.identifier)}</strong> ${esc(i.title)}
+                      <div class="muted">${esc(i.status)}</div>
+                    </li>`;
+                  })
+                  .join("")
+              : `<li class="muted">桌上暂无任务</li>`
+          }
+        </ul>
+      </article>`;
+    })
+    .join("");
 }
 
 function renderRuntimes(runtimes) {
@@ -102,7 +150,7 @@ async function refresh() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || res.statusText);
 
-    <metaEl.innerHTML = `mode <strong>${esc(data.bridge.mode)}</strong><br/>
+    metaEl.innerHTML = `mode <strong>${esc(data.bridge.mode)}</strong><br/>
       ${esc(data.me?.name || "")} · ${esc(data.me?.email || "")}<br/>
       ws ${esc(data.bridge.workspace_id || "—")}<br/>
       runtimes online <strong>${(data.runtimes || []).filter((r) => r.status === "online").length}</strong>`;
@@ -112,11 +160,13 @@ async function refresh() {
       " · " +
       (data.copy?.assignee || "task 绑 runtime，多 daemon 不漂移");
 
+    renderFloor(data.agents || [], data.issues || [], data.runtimes || []);
     renderRuntimes(data.runtimes || []);
     renderGates(data.hard_gates, data.bridge.app_url);
     renderBoard(data.issues || []);
   } catch (err) {
     metaEl.textContent = `桥接失败：${err.message}`;
+    floorEl.innerHTML = "";
     runtimeList.innerHTML = "";
     gateReview.innerHTML = `<li class="empty">${esc(err.message)}</li>`;
     gateInbox.innerHTML = "";

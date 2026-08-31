@@ -8,7 +8,7 @@
 | 姊妹仓 | [`munder-fleet-a`](../munder-fleet-a) · [`b`](../munder-fleet-b) · [`c`](../munder-fleet-c) |
 | 主核 | [multica-ai/multica](https://github.com/multica-ai/multica)（Go server + daemon + 工作区） |
 | 参考 | AionCore/AionUi · Munder Difflin |
-| 状态 | P0–P2 已完成（本地版 · Munder 壳 · Aion skill / 双 daemon） |
+| 状态 | P0–P3 完成（内网自托管）；对外商用见 `docs/COMMERCIAL_PATH.md` |
 
 ## 和 A/B/C 的差别
 
@@ -35,9 +35,10 @@ Multica License = Apache-2.0 + **Part I 附加条件**：未经商业许可，�
 2. [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) · [`docs/COPY_MAP.md`](./docs/COPY_MAP.md) · [`docs/LICENSE_NOTES.md`](./docs/LICENSE_NOTES.md)
 3. `./scripts/bootstrap.sh` — clone Multica + Aion + Munder 到 `refs/`
 4. `./scripts/selfhost-up.sh` — 官方 compose 自托管；再 `multica daemon start`
-5. `./scripts/shell-up.sh` — Munder 指挥台（本机免登桥）http://127.0.0.1:3927
-6. `./scripts/p2-second-daemon.sh` — 第二 daemon claim 隔离
-7. 按 [`docs/ROADMAP.md`](./docs/ROADMAP.md)：P3 品牌与迁移
+5. `./scripts/shell-up.sh` — Munder 指挥台（办公楼 + 硬闸）http://127.0.0.1:3927
+6. `./scripts/hive-import.sh` — Difflin hive → Multica issues
+7. `./scripts/p2-second-daemon.sh` — 第二 daemon claim 隔离
+8. 商用？先读 [`docs/COMMERCIAL_PATH.md`](./docs/COMMERCIAL_PATH.md)
 
 ## 成功标准（P0）
 

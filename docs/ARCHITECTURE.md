@@ -32,7 +32,9 @@ Munder Web / Electron ──(loopback)──► shell/bridge.mjs ──Bearer─
                                             remote: MUNDER_MULTICA_TOKEN
 ```
 
-硬闸产品叙述：Inbox 未归档通知 ∪ issue.`status_category=in_review`。
+硬闸产品叙述：Inbox 未归档通知 ∪ issue.`status_category=in_review`。  
+办公楼：壳内座位视图（agent / runtime / assignee issues），不替换 Multica Web。  
+Hive：`scripts/hive-import.sh` 仅迁移 `tasks.json` → Multica issues。
 
 ## 本地退化
 

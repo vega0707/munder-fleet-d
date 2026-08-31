@@ -18,4 +18,8 @@ Multica 公开 LICENSE 含 Apache-2.0 全文 + **Part I Additional Conditions**�
 - [x] 适用场景：☑ 仅自用/内网  □ 需对外产品（已谈许可）  
 - [x] 签名/日期：Cloud Agent P0 scaffold / 2026-08-31（默认场景落盘；**对外产品前须人类负责人复签**）  
 
-> 勾选含义：本仓按「组织内自托管接活平台」推进 P0–P2。若改为对外 SaaS 或嵌入售卖，必须清空本勾选、法务签字，并更新 ROADMAP 商用门禁后再改叙事。
+> 勾选含义：本仓按「组织内自托管接活平台」推进。若改为对外 SaaS 或嵌入售卖，必须清空本勾选、法务签字，并按 [`COMMERCIAL_PATH.md`](./COMMERCIAL_PATH.md) 完成门禁后再改叙事。
+
+## 商用门禁
+
+详见 [`COMMERCIAL_PATH.md`](./COMMERCIAL_PATH.md)。**P3 明确：商用路径未开放**（许可检查清单全未勾选）。
