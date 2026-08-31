@@ -36,6 +36,8 @@ npm run electron
 
 壳内打开 Multica Web：`http://localhost:3000`。鉴权走 Multica。
 
+深链示例：看板 `/workspaces/{slug}/...`；Issue identifier（如 `MUL-1`）；Inbox / `in_review` = 待人拍板。
+
 ### P0b / P1 — 本机桥 + Command Center
 
 `shell/bridge.mjs`：
@@ -46,7 +48,28 @@ npm run electron
 - `GET /bridge/board`：issues（assignee）+ runtimes + 硬闸（Inbox + `in_review`）
 - `GET /multica/*`：透传 App API（仍注入 token）
 
-UI：`shell/public/` — Munder 品牌指挥台（assignee 看板 · runtime · 硬闸）。
+只读 App API 最小集合（均需 Bearer；workspace 上下文由 CLI/`X-Workspace-Id` 或路径提供）：
+
+| 用途 | 端点（示意） |
+|------|----------------|
+| 当前用户 | `GET /api/me` |
+| 工作区 | `GET /api/workspaces` |
+| 项目 | `GET /api/projects` |
+| 任务/Issue | `GET /api/issues` |
+| Runtime | `GET /api/runtimes` |
+| Agent | `GET /api/agents` |
+| 待办/闸口 | `GET /api/inbox` + `status_category=in_review` |
+
+CLI 等价：
+
+```bash
+multica project list --output json
+multica issue list --output json
+multica runtime list --output json
+multica agent list --output json
+```
+
+UI：`shell/public/` — Munder 品牌指挥台（assignee 看板 · runtime · 硬闸 · 办公楼）。
 
 ### P2+ — 办公楼深度集成
 
